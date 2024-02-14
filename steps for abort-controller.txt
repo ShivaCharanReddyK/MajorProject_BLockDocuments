@@ -1,0 +1,51 @@
+npm install abort-controller
+//@ts-check
+
+// Polyfill AbortController first
+global.AbortController = require('abort-controller');
+
+import cors from "cors";
+import express from "express";
+import morgan from "morgan";
+import multer from "multer";
+import { v4 as uuid } from "uuid";
+import path from "path";
+import crypto from "crypto";
+import fsp from "fs/promises";
+import createHttpError from "http-errors";
+import { create } from "ipfs-http-client";
+import fs from "fs";
+import { PDFDocument } from "pdf-lib";
+
+// The rest of your code remains unchanged...
+
+
+// Dynamically import the abort-controller polyfill if AbortController is not globally available
+if (typeof AbortController === 'undefined') {
+  import('abort-controller').then(({ default: AbortController }) => {
+    global.AbortController = AbortController;
+  }).catch(error => console.error('Failed to load AbortController polyfill:', error));
+}
+
+import cors from 'cors';
+import express from 'express';
+import morgan from 'morgan';
+import multer from 'multer';
+import { v4 as uuid } from 'uuid';
+import path from 'path';
+import crypto from 'crypto';
+import { promises as fsp } from 'fs';
+import createHttpError from 'http-errors';
+import { create } from 'ipfs-http-client';
+import fs from 'fs';
+import { PDFDocument } from 'pdf-lib';
+
+
+const ipfs = create({
+  host: '127.0.0.1',
+  port: '8546', // Update this line to match your IPFS Desktop configuration
+  protocol: 'http'
+});
+
+
+
